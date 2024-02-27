@@ -1,6 +1,6 @@
 import express from 'express';
 // import graphqlHTTP from 'express-graphql';
-// import routes from './routes/index.js';
+import routes from './routes/index.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
@@ -28,7 +28,7 @@ app.get('*', (req, res) => {
 });
 
 // db connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/ERA-Skateboarding', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/ERA-Skateboarding?authSource=admin', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
