@@ -1,12 +1,16 @@
 import express from 'express';
+import dotenv from 'dotenv';
 // import graphqlHTTP from 'express-graphql';
 import routes from './routes/index.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
+dotenv.config({ path: '.env' });
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+console.log(process.env.NODE_ENV, process.env.PORT);
 // express config
 app.use(cors());
 // app.use('/graphql', graphqlHTTP({
@@ -16,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // turn on routes
-// app.use(routes);
+app.use(routes);
 
 // builds client
 if (process.env.NODE_ENV === 'production') {
@@ -28,7 +32,7 @@ app.get('*', (req, res) => {
 });
 
 // db connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/ERA-Skateboarding?authSource=admin', {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
